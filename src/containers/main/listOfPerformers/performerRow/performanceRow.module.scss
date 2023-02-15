@@ -1,6 +1,33 @@
-.listRow{
+.listRow {
   height: 80px;
   border: 3px solid rgba(0, 157, 255, 0.32);
   border-radius: 8px;
   margin-bottom: 16px;
+}
+
+.performer {
+  .titleRow {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 8px;
+    margin-bottom: 8px;
+
+    .name {
+      font-size: 16px;
+    }
+  }
+}
+
+.task{
+  border: 3px solid rgba(0, 157, 255, 0.32);
+  border-radius: 8px;
+  position: relative;
+
+  .number{
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    font-size: 10px
+  }
 }

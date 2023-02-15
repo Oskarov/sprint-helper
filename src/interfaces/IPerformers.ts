@@ -11,3 +11,7 @@ export interface IPerformerItem {
     roleId: number,
     tasks: ITask[]
 }
+export interface IPerformerTaskPayload {
+    performerUuid: string,
+    task: ITask,
+}
