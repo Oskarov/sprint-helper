@@ -128,7 +128,7 @@ const Control: React.FC<ControlProps> = () => {
                         fullWidth
                         value={taskData.capacity}
                         onChange={(e) => {
-                            handleTaskDataChange('capacity', e.target.value)
+                            handleTaskDataChange('capacity', +e.target.value)
                         }}
                         variant="standard"
                     />

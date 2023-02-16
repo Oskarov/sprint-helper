@@ -27,7 +27,6 @@ const DragAndDropContext: React.FC<DragAndDropContextProps> = ({children}) => {
      }, []);*/
 
     const onDragEnd = (result: DropResult) => {
-        console.log(result);
 
         //Из бэклога в бэклог
         if (result.source.droppableId === 'backlog' && result.destination?.droppableId === 'backlog') {

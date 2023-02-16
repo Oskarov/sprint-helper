@@ -1,0 +1,58 @@
+.settings {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+}
+
+.addButton{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid black;
+  border-radius: 50%;
+  cursor: pointer;
+  transform: rotate(0deg);
+  transition-duration: 1s;
+
+  &.reverse{
+    transform: rotate(405deg);
+  }
+}
+
+.list{
+  text-align: right;
+  width: 300px;
+  position: absolute;
+  right: 9px;
+  bottom: 52px;
+  opacity: 0;
+  transition-duration: 1s;
+
+  &.open{
+    opacity: 1;
+  }
+
+  >*{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    cursor: pointer;
+    padding: 8px 0;
+
+    &:hover{
+      color: rgba(0, 157, 255, 0.61);
+    }
+
+    >span{
+      margin-right: 8px;
+    }
+  }
+}
+
+.taskType{
+  position: absolute !important;
+  right: 24px;
+  top:16px;
+}

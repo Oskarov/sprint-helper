@@ -13,6 +13,8 @@ export interface ITasksState {
 export const TASK_TYPES_ENUM = {
     REVIEW: 10,
     MEETINGS: 20,
+    VACATION: 30,
+    HOLLYDAYS: 40,
     BACKEND_TASK: 110,
     BACKEND_BUG: 120,
     BACKEND_TECH_DEBT: 130,
@@ -63,5 +65,15 @@ export const taskTypes = [
         id: 8,
         name: 'Фронтенд Техдолг',
         type: TASK_TYPES_ENUM.FRONTEND_TECH_DEBT
+    },
+    {
+        id: 9,
+        name: 'Отпуск',
+        type: TASK_TYPES_ENUM.VACATION
+    },
+    {
+        id: 10,
+        name: 'Праздники',
+        type: TASK_TYPES_ENUM.HOLLYDAYS
     },
 ]

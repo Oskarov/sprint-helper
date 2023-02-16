@@ -1,0 +1,36 @@
+.ruler{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.padding{
+  flex: 0 0 auto;
+}
+
+.baskets{
+  border-radius: 50px;
+  overflow: hidden;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  >* {
+    height: 6px;
+  }
+  .product{
+    width: 70%;
+    background: green;
+  }
+
+  .techdebt{
+    width: 20%;
+    background: yellow;
+  }
+
+  .support{
+    width: 10%;
+    background: red;
+  }
+}

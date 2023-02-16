@@ -1,0 +1,22 @@
+.metrics {
+  padding-left: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  > * {
+    margin: 4px;
+  }
+}
+
+.product{
+  color: green;
+}
+
+.techdebt{
+  color: #bbbb58;
+}
+
+.support{
+  color: red;
+}
