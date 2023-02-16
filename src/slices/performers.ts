@@ -3,23 +3,7 @@ import {IPerformerItem, IPerformersState, IPerformerTaskPayload} from "../interf
 import {ITask}                                                   from "../interfaces/ITask";
 
 const initialState: IPerformersState = {
-    items: [
-        {
-            firstName: 'Андрей',
-            lastName: 'Галкин',
-            roleId: 1,
-            tasks: [],
-            uuid: '1a1a1a1a1a1a1a'
-        },
-        {
-            firstName: 'Артём',
-            lastName: 'Маколов',
-            roleId: 1,
-            tasks: [],
-            uuid: '2r2r2r2r2r2r2r'
-        },
-
-    ],
+    items: [],
 }
 
 
