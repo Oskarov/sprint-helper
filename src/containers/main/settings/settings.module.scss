@@ -4,7 +4,7 @@
   bottom: 24px;
 }
 
-.addButton{
+.addButton {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,12 +16,12 @@
   transform: rotate(0deg);
   transition-duration: 1s;
 
-  &.reverse{
+  &.reverse {
     transform: rotate(405deg);
   }
 }
 
-.list{
+.list {
   text-align: right;
   width: 300px;
   position: absolute;
@@ -29,30 +29,33 @@
   bottom: 52px;
   opacity: 0;
   transition-duration: 1s;
+  height: 0;
+  overflow: hidden;
 
-  &.open{
+  &.open {
     opacity: 1;
+    height: auto;
   }
 
-  >*{
+  > * {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     cursor: pointer;
     padding: 8px 0;
 
-    &:hover{
+    &:hover {
       color: rgba(0, 157, 255, 0.61);
     }
 
-    >span{
+    > span {
       margin-right: 8px;
     }
   }
 }
 
-.taskType{
+.taskType {
   position: absolute !important;
   right: 24px;
-  top:16px;
+  top: 16px;
 }

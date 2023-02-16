@@ -30,10 +30,10 @@ const performersSlice = createSlice({
         addPerformer: (state, {payload}: PayloadAction<IPerformerItem>) => {
             return {
                 ...state,
-                items: {
+                items: [
                     ...state.items,
                     payload
-                }
+                ]
             };
         },
         addTaskForPerformer: (state, {payload}: PayloadAction<IPerformerTaskPayload>) => {

@@ -1,46 +1,48 @@
-# Getting Started with Create React App
+# sprint-helper
+react-redux mvp app based on bd&d and redux-persist
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Небольшое MVP с данными, которые хранятся локально благодаря redux-persist и красивой анимацией beautiful drug and drop
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+Personal project of [Dmitriy Oskarov](#)
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Technology stack:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+* React
+* Redux-Toolkit
+* Redux-Persist
+* Beautiful-drug-and-drop
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Attention
 
-### `npm run build`
+This project is not a demonstration of optimal solutions and is aimed at studying specific things.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Этот проект не является демонстрацией оптимальных решений и направлен на изучение конкретных технологий и подходов.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Description
 
-### `npm run eject`
+Полезная утилита для формирования спринта из задач у которых мы точно знаем их оценку в часах.
+1. В настройках (справа внизу) мы задаём ширину области - для удобства и выхода за ограничения нашего спринта.
+2. Там же задаём величину спринта в часах (например 10 дней разработчика в спринте по 6 часов = 60)
+3. Цена деления в пикселях - для удобства позволяет увеличивать список и уменьшать его (масштабировать визуальную часть)
+4. Создаём Исполнителей (плюсик в верхнем правом углу) - указываем их тип.
+5. Там же создаём задачи.
+6. Задачи с типами Ревью, Встречи, Праздники, Отпуск - отъедают время спринта и их лучше размещать в начале ряда исполнителя
+7. Остальные задачи делятся на три бакета: Product, Techdebt, Support.
+8. Ориентируясь на линейку над беклогом ипсолнителя мы переносим туда задачи из беклога продукта, формируя спринт, понимая что влезет, а что нет и в какие категории мы заходим.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+---
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Installing
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. clone
+2. npm install
+3. npm run dev
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).

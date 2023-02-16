@@ -41,7 +41,7 @@ const Backlog: React.FC<BacklogProps> = () => {
                     {tasks.map((item, index) => (
                         <Draggable key={item.uuid} draggableId={item.uuid} index={index}>
                             {(provided, snapshot) => (
-                                <TaskCard item={item} provided={provided} snapshot={snapshot}/>
+                                <TaskCard item={item} provided={provided} snapshot={snapshot} performerLink="backlog"/>
                             )}
                         </Draggable>
                     ))}

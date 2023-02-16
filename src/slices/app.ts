@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction}                              from '@reduxjs/toolkit';
 import {IPerformerItem, IPerformersState, IPerformerTaskPayload} from "../interfaces/IPerformers";
-import {ITask, ITasksState}                                      from "../interfaces/ITask";
-import {IAppState}                                               from "../interfaces/IApp";
+import {ITask, ITasksState}                     from "../interfaces/ITask";
+import {IAppState, IConfirmation, IInformation} from "../interfaces/IApp";
 
 const initialState: IAppState = {
     rowSize: 60,
@@ -39,5 +39,5 @@ export const appReducer = appSlice.reducer;
 export const {
     setValueOfDivision,
     setSprintSize,
-    setRowSize
+    setRowSize,
 } = appSlice.actions;

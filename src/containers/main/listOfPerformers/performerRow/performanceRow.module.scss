@@ -9,14 +9,29 @@
   .titleRow {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     margin-top: 8px;
     margin-bottom: 8px;
 
-    .name {
-      font-size: 16px;
-      font-weight: 700;
+    .left{
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      .name {
+        font-size: 16px;
+        font-weight: 700;
+      }
+
+      .icon{
+        margin-right: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
     }
+
+
   }
 }
 

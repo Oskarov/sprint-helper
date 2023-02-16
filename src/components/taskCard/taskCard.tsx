@@ -1,7 +1,7 @@
 import React                                       from 'react';
 import CN                                          from "classnames";
 import styles                                      from "./taskCard.module.scss";
-import {ITask, TASK_TYPES_ENUM}                    from "../../interfaces/ITask";
+import {ITask, TASK_TYPES_ENUM, taskTypes}         from "../../interfaces/ITask";
 import {DraggableProvided, DraggableStateSnapshot} from "react-beautiful-dnd";
 import {hourDefinition}                            from "../../App";
 import VisibilityIcon                              from '@mui/icons-material/Visibility';
@@ -10,12 +10,14 @@ import KayakingIcon                                from '@mui/icons-material/Kay
 import CelebrationIcon                             from '@mui/icons-material/Celebration';
 import {useSelector}                               from "react-redux";
 import {TStore}                                    from "../../store/store";
-import {Tooltip}                                   from "@mui/material";
+import {Menu, MenuItem, Tooltip}                   from "@mui/material";
+import TaskMenu                                    from "./menu/menu";
 
 interface TaskCardProps {
     item: ITask,
     provided: DraggableProvided,
-    snapshot: DraggableStateSnapshot
+    snapshot: DraggableStateSnapshot,
+    performerLink: string
 }
 
 const getItemStyle = (isDragging: boolean, draggableStyle: any, capacity: number, valueOfDivision: number) => ({
@@ -24,16 +26,40 @@ const getItemStyle = (isDragging: boolean, draggableStyle: any, capacity: number
     padding: 0,
     margin: `2px 0`,
     width: `${capacity * valueOfDivision}px`,
+    cursor: 'context-menu',
     // styles we need to apply on draggables
     ...draggableStyle,
 });
 
-const TaskCard: React.FC<TaskCardProps> = ({item, provided, snapshot}) => {
+const TaskCard: React.FC<TaskCardProps> = ({item, provided, snapshot, performerLink}) => {
     const {app} = useSelector((state: TStore) => ({
         app: state.app
     }));
 
+
+    const [contextMenu, setContextMenu] = React.useState<{
+        mouseX: number;
+        mouseY: number;
+    } | null>(null);
+
+    const handleContextMenu = (event: React.MouseEvent) => {
+        event.preventDefault();
+        setContextMenu(
+            contextMenu === null
+                ? {
+                    mouseX: event.clientX + 2,
+                    mouseY: event.clientY - 6,
+                }
+                : // repeated contextmenu when it is already open closes it with Chrome 84 on Ubuntu
+                  // Other native context menus might behave different.
+                  // With this behavior we prevent contextmenu from the backdrop to re-locale existing context menus.
+                null,
+        );
+    };
+
+
     return <div
+        onContextMenu={handleContextMenu}
         ref={provided.innerRef}
         {...provided.draggableProps}
         {...provided.dragHandleProps}
@@ -81,15 +107,17 @@ const TaskCard: React.FC<TaskCardProps> = ({item, provided, snapshot}) => {
         {![TASK_TYPES_ENUM.MEETINGS, TASK_TYPES_ENUM.REVIEW, TASK_TYPES_ENUM.VACATION, TASK_TYPES_ENUM.HOLLYDAYS].includes(item.type) &&
         <div>
             <div className={styles.number}><a href={`https://jira.eapteka.ru/browse/${item.number}`}
-                                              target={"_blank"}>{item.number}</a></div>
+                                              target={"_blank"} rel={"noreferrer`"}>{item.number}</a></div>
             <div className={styles.name}>
                 <Tooltip title={`${item.number} ${item.name} (${item.capacity})`}>
                     <span>{item.name}</span>
                 </Tooltip>
             </div>
-        </div>}
 
+        </div>}
+        <TaskMenu contextMenu={contextMenu} setContextMenu={setContextMenu} performerLink={performerLink} task={item}/>
     </div>;
+
 }
 
 export default TaskCard;

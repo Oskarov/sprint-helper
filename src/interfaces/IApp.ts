@@ -3,3 +3,17 @@ export interface IAppState {
     sprintSize: number,
     valueOfDivision: number,
 }
+
+export interface IConfirmation {
+    isOpen: boolean,
+    confirmationFunction: () => void,
+    dialogType?: 'positive' | 'negative',
+    dialogText?: string
+}
+
+export interface IInformation {
+    isOpen: boolean,
+    modalTitle?: string
+    modalText?: string
+    closeButton?: boolean
+}
