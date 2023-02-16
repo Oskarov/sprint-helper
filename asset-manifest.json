@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/sprint_helper/static/css/main.baf535b0.css",
+    "main.js": "/sprint_helper/static/js/main.f6c8b54e.js",
+    "index.html": "/sprint_helper/index.html",
+    "main.baf535b0.css.map": "/sprint_helper/static/css/main.baf535b0.css.map",
+    "main.f6c8b54e.js.map": "/sprint_helper/static/js/main.f6c8b54e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.baf535b0.css",
+    "static/js/main.f6c8b54e.js"
+  ]
+}
