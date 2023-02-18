@@ -4,7 +4,7 @@ import CN                                                 from "classnames";
 import SettingsIcon                                       from '@mui/icons-material/Settings';
 import DisplaySettingsIcon                                from '@mui/icons-material/DisplaySettings';
 import CleaningServicesIcon                               from '@mui/icons-material/CleaningServices';
-import DeveloperModeIcon                                  from '@mui/icons-material/DeveloperMode';
+import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import Button                                             from '@mui/material/Button';
 import TextField                                          from '@mui/material/TextField';
 import Dialog                                             from '@mui/material/Dialog';
@@ -14,11 +14,14 @@ import DialogContentText                                  from '@mui/material/Di
 import DialogTitle                                        from '@mui/material/DialogTitle';
 import {FormControl, MenuItem, Select, SelectChangeEvent} from "@mui/material";
 import {useDispatch, useSelector}                         from "react-redux";
-import {addTask}                                          from "../../../slices/tasks";
+import {addTask, clearTasks}                              from "../../../slices/tasks";
 import {generateRandomString}                             from "../../../utils/generateRandomString";
 import {TASK_TYPES_ENUM, taskTypes}                       from "../../../interfaces/ITask";
-import {TStore}                                        from "../../../store/store";
-import {setRowSize, setSprintSize, setValueOfDivision} from "../../../slices/app";
+import {TStore}                                           from "../../../store/store";
+import {setRowSize, setSprintSize, setValueOfDivision}    from "../../../slices/app";
+import ExportJson                                         from './exportJson/exportJson';
+import {setConfirmationOpen}                              from "../../../slices/modal";
+import {removeAllPerformerTasks}                          from "../../../slices/performers";
 
 interface SettingsProps {
 
@@ -33,7 +36,7 @@ const Settings: React.FC<SettingsProps> = () => {
         app: state.app,
     }));
 
-     const handleTaskDialogOpen = () => {
+    const handleTaskDialogOpen = () => {
         setCreateTaskDialogOpen(true);
     };
 
@@ -41,6 +44,25 @@ const Settings: React.FC<SettingsProps> = () => {
         setCreateTaskDialogOpen(false);
     };
 
+    const handleClearBacklog = () => {
+        dispatch(setConfirmationOpen({
+            dialogType: "positive",
+            dialogText: "Вы точно хотите очистить бэклог продукта?",
+            confirmationFunction: () => {
+                dispatch(clearTasks());
+            }
+        }))
+    }
+
+    const handleClearPerformersTasks = () => {
+        dispatch(setConfirmationOpen({
+            dialogType: "positive",
+            dialogText: "Вы точно хотите очистить бэклог всех исполнителей?",
+            confirmationFunction: () => {
+                dispatch(removeAllPerformerTasks());
+            }
+        }))
+    }
 
 
     return <div className={styles.settings}>
@@ -49,8 +71,9 @@ const Settings: React.FC<SettingsProps> = () => {
         </div>
         <div className={CN(styles.list, {[styles.open]: open})}>
             <div onClick={handleTaskDialogOpen}><span>Настройки</span><DisplaySettingsIcon/></div>
-            <div><span>Очистить беклог</span><CleaningServicesIcon/></div>
-            <div><span>Загрузить json</span><DeveloperModeIcon/></div>
+            <div onClick={handleClearBacklog}><span>Очистить беклог продукта</span><CleaningServicesIcon/></div>
+            <div onClick={handleClearPerformersTasks}><span>Очистить беклог исполнителей</span><AutoFixHighIcon/></div>
+            {/*<ExportJson />*/}
         </div>
 
 
@@ -59,8 +82,10 @@ const Settings: React.FC<SettingsProps> = () => {
                 <DialogTitle>Настройки</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Ширина области отвечает за цветные поля драг энд дропа. Ширина спринта за линейку над областью исполнителя.
-                        Цена деления - это ширина в пикселях которая присваивается единице величины задачи (часу или сторипоинту)
+                        Ширина области отвечает за цветные поля драг энд дропа. Ширина спринта за линейку над областью
+                        исполнителя.
+                        Цена деления - это ширина в пикселях которая присваивается единице величины задачи (часу или
+                        сторипоинту)
                     </DialogContentText>
                     <TextField
                         autoFocus
@@ -101,7 +126,6 @@ const Settings: React.FC<SettingsProps> = () => {
                         }}
                         variant="standard"
                     />
-
 
 
                 </DialogContent>

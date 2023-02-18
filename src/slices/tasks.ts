@@ -45,6 +45,12 @@ const tasksSlice = createSlice({
                 items: newItems
             }
         },
+        clearTasks: (state) => {
+            return {
+                ...state,
+                items: []
+            }
+        },
     }
 })
 
@@ -53,5 +59,6 @@ export const {
     addTask,
     removeTask,
     changeTaskIndex,
-    createTaskWithIndex
+    createTaskWithIndex,
+    clearTasks
 } = tasksSlice.actions;

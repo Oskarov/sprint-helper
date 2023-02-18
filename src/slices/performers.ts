@@ -58,6 +58,12 @@ const performersSlice = createSlice({
                 })
             }
         },
+        removeAllPerformerTasks: (state) => {
+            return {
+                ...state,
+                items: state.items.map(performer => ({...performer, tasks: []}))
+            }
+        },
         changePerformerTaskIndex: (state, {payload}: PayloadAction<{ performerUuid: string, taskUuid: string, index: number }>) => {
             return {
                 ...state,
@@ -84,5 +90,6 @@ export const {
     addTaskForPerformer,
     addTaskForPerformerWithIndex,
     removePerformerTask,
-    changePerformerTaskIndex
+    changePerformerTaskIndex,
+    removeAllPerformerTasks
 } = performersSlice.actions;
