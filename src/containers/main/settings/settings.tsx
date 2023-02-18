@@ -4,7 +4,7 @@ import CN                                                 from "classnames";
 import SettingsIcon                                       from '@mui/icons-material/Settings';
 import DisplaySettingsIcon                                from '@mui/icons-material/DisplaySettings';
 import CleaningServicesIcon                               from '@mui/icons-material/CleaningServices';
-import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
+import AutoFixHighIcon                                    from '@mui/icons-material/AutoFixHigh';
 import Button                                             from '@mui/material/Button';
 import TextField                                          from '@mui/material/TextField';
 import Dialog                                             from '@mui/material/Dialog';
@@ -20,7 +20,7 @@ import {TASK_TYPES_ENUM, taskTypes}                       from "../../../interfa
 import {TStore}                                           from "../../../store/store";
 import {setRowSize, setSprintSize, setValueOfDivision}    from "../../../slices/app";
 import ExportJson                                         from './exportJson/exportJson';
-import {setConfirmationOpen}                              from "../../../slices/modal";
+import {setConfirmationOpen, setInformationOpen}          from "../../../slices/modal";
 import {removeAllPerformerTasks}                          from "../../../slices/performers";
 
 interface SettingsProps {
@@ -63,12 +63,28 @@ const Settings: React.FC<SettingsProps> = () => {
             }
         }))
     }
+    const versionHandle = () => {
+        dispatch(setInformationOpen({
+            modalTitle: "Информация",
+            isOpen: true,
+            modalText: <div>
+                <ul>
+                    <li>Добавлена возможность удалять карточки из контекстного меню</li>
+                    <li>Карточки с одним и тем же номером задачи подсвечиваются, например Бэк и Фронт задачи одной
+                        стори
+                    </li>
+                    <li>Есть возможность сворачивать бэклоги исполнителей по клику на стрелку</li>
+                </ul>
+            </div>
+        }));
+    }
 
 
     return <div className={styles.settings}>
         <div className={CN(styles.addButton, {[styles.reverse]: open})} onClick={() => setOpen(open => !open)}>
             <SettingsIcon/>
         </div>
+        <div className={styles.version} onClick={versionHandle}>v 1.03</div>
         <div className={CN(styles.list, {[styles.open]: open})}>
             <div onClick={handleTaskDialogOpen}><span>Настройки</span><DisplaySettingsIcon/></div>
             <div onClick={handleClearBacklog}><span>Очистить беклог продукта</span><CleaningServicesIcon/></div>

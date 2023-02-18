@@ -2,5 +2,6 @@ import {IConfirmation, IInformation} from "./IApp";
 
 export interface IModalState{
     confirmation: IConfirmation,
-    information: IInformation
+    information: IInformation,
+    targetTask: string,
 }

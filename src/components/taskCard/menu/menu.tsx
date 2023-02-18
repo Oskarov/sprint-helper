@@ -46,10 +46,10 @@ const TaskMenu: React.FC<menuProps> = ({contextMenu, setContextMenu, performerLi
                 : undefined
         }
     >
-        {performerLink !== 'backlog' && <>
+        {performerLink !== 'backlog' && <div>
             <MenuItem onClick={handleClose} disabled={true}>На верх бэклога</MenuItem>
             <MenuItem onClick={handleClose} disabled={true}>Вниз бэклога</MenuItem>
-        </>}
+        </div>}
         <MenuItem onClick={handleClose} disabled={true}>Редактировать</MenuItem>
         <MenuItem onClick={handleClose} disabled={true}>Копировать</MenuItem>
         <Divider/>

@@ -1,3 +1,5 @@
+import {ReactComponent} from "*.svg";
+
 export interface IAppState {
     rowSize: number,
     sprintSize: number,
@@ -14,6 +16,6 @@ export interface IConfirmation {
 export interface IInformation {
     isOpen: boolean,
     modalTitle?: string
-    modalText?: string
+    modalText?: any
     closeButton?: boolean
 }

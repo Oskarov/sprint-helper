@@ -4,6 +4,13 @@
   bottom: 24px;
 }
 
+.version{
+  position: fixed;
+  right: 24px;
+  bottom: 4px;
+  cursor: pointer;
+}
+
 .addButton {
   display: flex;
   align-items: center;

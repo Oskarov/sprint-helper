@@ -8,10 +8,11 @@ import VisibilityIcon                              from '@mui/icons-material/Vis
 import GroupsIcon                                  from '@mui/icons-material/Groups';
 import KayakingIcon                                from '@mui/icons-material/Kayaking';
 import CelebrationIcon                             from '@mui/icons-material/Celebration';
-import {useSelector}                               from "react-redux";
+import {useDispatch, useSelector}                  from "react-redux";
 import {TStore}                                    from "../../store/store";
 import {Menu, MenuItem, Tooltip}                   from "@mui/material";
 import TaskMenu                                    from "./menu/menu";
+import {clearTargetTask, setTargetTask}            from "../../slices/modal";
 
 interface TaskCardProps {
     item: ITask,
@@ -32,10 +33,11 @@ const getItemStyle = (isDragging: boolean, draggableStyle: any, capacity: number
 });
 
 const TaskCard: React.FC<TaskCardProps> = ({item, provided, snapshot, performerLink}) => {
-    const {app} = useSelector((state: TStore) => ({
-        app: state.app
+    const {app, targetTask} = useSelector((state: TStore) => ({
+        app: state.app,
+        targetTask: state.modal.targetTask
     }));
-
+    const dispatch = useDispatch();
 
     const [contextMenu, setContextMenu] = React.useState<{
         mouseX: number;
@@ -57,8 +59,19 @@ const TaskCard: React.FC<TaskCardProps> = ({item, provided, snapshot, performerL
         );
     };
 
+    const handleFocus = (e: React.FocusEvent<HTMLDivElement, Element>) => {
+        // eslint-disable-next-line no-console
+        console.log(e)
+    }
+
 
     return <div
+        onMouseOver={(e) => {
+            dispatch(setTargetTask(item.number));
+        }}
+        onMouseOut={(e) => {
+            dispatch(clearTargetTask());
+        }}
         onContextMenu={handleContextMenu}
         ref={provided.innerRef}
         {...provided.draggableProps}
@@ -70,6 +83,7 @@ const TaskCard: React.FC<TaskCardProps> = ({item, provided, snapshot, performerL
             app.valueOfDivision
         )}
         className={CN(styles.task, {
+            [styles.targetTask]: (targetTask === item.number) && ![TASK_TYPES_ENUM.MEETINGS, TASK_TYPES_ENUM.REVIEW, TASK_TYPES_ENUM.VACATION, TASK_TYPES_ENUM.HOLLYDAYS].includes(item.type),
             [styles.onDraw]: snapshot.isDragging,
             [styles.review]: item.type === TASK_TYPES_ENUM.REVIEW,
             [styles.meetings]: item.type === TASK_TYPES_ENUM.MEETINGS,

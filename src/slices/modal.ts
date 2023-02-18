@@ -3,6 +3,7 @@ import {IPerformerItem, IPerformersState, IPerformerTaskPayload} from "../interf
 import {ITask, ITasksState}                                      from "../interfaces/ITask";
 import {IAppState, IConfirmation, IInformation}                  from "../interfaces/IApp";
 import {IModalState}                                             from "../interfaces/IModal";
+import {ReactComponent}                                          from "*.svg";
 
 const initialState: IModalState = {
     confirmation: {
@@ -16,7 +17,8 @@ const initialState: IModalState = {
         modalText: '',
         modalTitle: '',
         closeButton: false,
-    }
+    },
+    targetTask: '',
 }
 
 
@@ -65,7 +67,19 @@ const modalSlice = createSlice({
                     isOpen: false
                 }
             }
-        }
+        },
+        setTargetTask: (state, { payload }: PayloadAction<string>) => {
+            return {
+                ...state,
+                targetTask: payload
+            };
+        },
+        clearTargetTask: (state) => {
+            return {
+                ...state,
+                targetTask: ''
+            };
+        },
     }
 })
 
@@ -74,5 +88,7 @@ export const {
     setConfirmationOpen,
     setInformationOpen,
     setInformationClose,
-    setConfirmationClose
+    setConfirmationClose,
+    setTargetTask,
+    clearTargetTask
 } = modalSlice.actions;
