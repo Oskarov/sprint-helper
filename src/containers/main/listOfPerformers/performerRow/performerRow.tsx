@@ -4,17 +4,18 @@ import {Draggable, Droppable}                 from "react-beautiful-dnd";
 import {inspect}                              from "util";
 import styles                                 from './performanceRow.module.scss';
 import CN                                     from 'classnames';
-import {hourDefinition, maxSprintHours}       from "../../../../App";
-import TaskCard                               from "../../../../components/taskCard/taskCard";
-import {useSelector}                          from "react-redux";
-import {TStore}                               from "../../../../store/store";
-import Ruler                                  from "./ruler/ruler";
-import Metrics                                from "./metrics/metrics";
-import QrCode2Icon                            from '@mui/icons-material/QrCode2';
-import IntegrationInstructionsIcon            from '@mui/icons-material/IntegrationInstructions';
-import BugReportIcon                          from '@mui/icons-material/BugReport';
-import AnalyticsIcon                          from '@mui/icons-material/Analytics';
-import KeyboardArrowDownIcon                  from '@mui/icons-material/KeyboardArrowDown';
+import {hourDefinition, maxSprintHours} from "../../../../App";
+import TaskCard                         from "../../../../components/taskCard/taskCard";
+import {useSelector}                    from "react-redux";
+import {TStore}                         from "../../../../store/store";
+import Ruler                            from "./ruler/ruler";
+import Metrics                          from "./metrics/metrics";
+import QrCode2Icon                      from '@mui/icons-material/QrCode2';
+import IntegrationInstructionsIcon      from '@mui/icons-material/IntegrationInstructions';
+import BugReportIcon                    from '@mui/icons-material/BugReport';
+import AnalyticsIcon                    from '@mui/icons-material/Analytics';
+import KeyboardArrowDownIcon            from '@mui/icons-material/KeyboardArrowDown';
+import PerformerMenu                    from "./menu/menu";
 
 interface PerformerRowProps {
     performer: IPerformerItem
@@ -35,10 +36,27 @@ const PerformerRow: React.FC<PerformerRowProps> = ({performer}) => {
         app: state.app,
     }));
 
-    const [open, setOpen] = useState(true)
+    const [contextMenu, setContextMenu] = React.useState<{
+        mouseX: number;
+        mouseY: number;
+    } | null>(null);
+
+    const [open, setOpen] = useState(true);
+
+    const handleContextMenu = (event: React.MouseEvent) => {
+        event.preventDefault();
+        setContextMenu(
+            contextMenu === null
+                ? {
+                    mouseX: event.clientX + 2,
+                    mouseY: event.clientY - 6,
+                }
+                : null,
+        );
+    };
 
     return <div className={styles.performer}>
-        <div className={styles.titleRow}>
+        <div className={styles.titleRow} onContextMenu={handleContextMenu}>
             <div className={styles.left}>
                 <div className={styles.icon}>
                     {performer.roleId === PERFORMER_TYPES_ENUM.FRONTEND && <QrCode2Icon/>}
@@ -79,6 +97,8 @@ const PerformerRow: React.FC<PerformerRowProps> = ({performer}) => {
                 )}
             </Droppable>
         </>}
+
+        <PerformerMenu contextMenu={contextMenu} setContextMenu={setContextMenu} performer={performer}/>
 
     </div>;
 }

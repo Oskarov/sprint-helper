@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 6px 0;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 800;
+  margin-right: 8px;
+}
+
+.buttons {
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #e2e2e2;
+  height: 40px;
+  border-radius: 20px;
+
+  > * {
+    &:hover {
+      color: #8295e1;
+      cursor: pointer;
+    }
+  }
+}

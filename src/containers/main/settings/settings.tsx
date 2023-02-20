@@ -12,14 +12,10 @@ import DialogActions                                      from '@mui/material/Di
 import DialogContent                                      from '@mui/material/DialogContent';
 import DialogContentText                                  from '@mui/material/DialogContentText';
 import DialogTitle                                        from '@mui/material/DialogTitle';
-import {FormControl, MenuItem, Select, SelectChangeEvent} from "@mui/material";
 import {useDispatch, useSelector}                         from "react-redux";
-import {addTask, clearTasks}                              from "../../../slices/tasks";
-import {generateRandomString}                             from "../../../utils/generateRandomString";
-import {TASK_TYPES_ENUM, taskTypes}                       from "../../../interfaces/ITask";
+import {clearTasks}                              from "../../../slices/tasks";
 import {TStore}                                           from "../../../store/store";
 import {setRowSize, setSprintSize, setValueOfDivision}    from "../../../slices/app";
-import ExportJson                                         from './exportJson/exportJson';
 import {setConfirmationOpen, setInformationOpen}          from "../../../slices/modal";
 import {removeAllPerformerTasks}                          from "../../../slices/performers";
 
@@ -69,6 +65,11 @@ const Settings: React.FC<SettingsProps> = () => {
             isOpen: true,
             modalText: <div>
                 <ul>
+                    <li>Добавлены роли тимлида и продукт менеджера</li>
+                    <li>Добавлена Общая статистика по спринту в хедере странице (по кнопке с графиком)</li>
+                    <li>Добавлена возможность видеть количество задач в каждом бакете + пояснения при наведении</li>
+                    <li>Добавлена возможность видеть бакет капасити исполнителя</li>
+                    <li>------------------------------------------------</li>
                     <li>Добавлена возможность удалять карточки из контекстного меню</li>
                     <li>Карточки с одним и тем же номером задачи подсвечиваются, например Бэк и Фронт задачи одной
                         стори
@@ -84,7 +85,7 @@ const Settings: React.FC<SettingsProps> = () => {
         <div className={CN(styles.addButton, {[styles.reverse]: open})} onClick={() => setOpen(open => !open)}>
             <SettingsIcon/>
         </div>
-        <div className={styles.version} onClick={versionHandle}>v 1.03</div>
+        <div className={styles.version} onClick={versionHandle}>v 1.04</div>
         <div className={CN(styles.list, {[styles.open]: open})}>
             <div onClick={handleTaskDialogOpen}><span>Настройки</span><DisplaySettingsIcon/></div>
             <div onClick={handleClearBacklog}><span>Очистить беклог продукта</span><CleaningServicesIcon/></div>

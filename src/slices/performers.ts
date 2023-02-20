@@ -20,6 +20,12 @@ const performersSlice = createSlice({
                 ]
             };
         },
+        removePerformer: (state, {payload}: PayloadAction<string>) => {
+            return {
+                ...state,
+                items: state.items.filter(performer=>performer.uuid !== payload)
+            };
+        },
         addTaskForPerformer: (state, {payload}: PayloadAction<IPerformerTaskPayload>) => {
             return {
                 ...state,
@@ -91,5 +97,6 @@ export const {
     addTaskForPerformerWithIndex,
     removePerformerTask,
     changePerformerTaskIndex,
-    removeAllPerformerTasks
+    removeAllPerformerTasks,
+    removePerformer
 } = performersSlice.actions;

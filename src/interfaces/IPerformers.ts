@@ -21,6 +21,8 @@ export const PERFORMER_TYPES_ENUM = {
     BACKEND: 20,
     TESTING: 30,
     ANALYTICS: 40,
+    TEAM_LEAD: 50,
+    PM: 50,
 }
 
 
@@ -44,6 +46,16 @@ export const performerTypes = [
         id: 4,
         name: 'Аналитик',
         type: PERFORMER_TYPES_ENUM.ANALYTICS
+    },
+    {
+        id: 5,
+        name: 'Тимлид',
+        type: PERFORMER_TYPES_ENUM.TEAM_LEAD
+    },
+    {
+        id: 6,
+        name: 'Продукт менеджер',
+        type: PERFORMER_TYPES_ENUM.PM
     },
 
 ]
