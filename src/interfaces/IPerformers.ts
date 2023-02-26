@@ -22,7 +22,7 @@ export const PERFORMER_TYPES_ENUM = {
     TESTING: 30,
     ANALYTICS: 40,
     TEAM_LEAD: 50,
-    PM: 50,
+    PM: 60,
 }
 
 

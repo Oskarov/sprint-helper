@@ -1,6 +1,7 @@
-import React              from 'react';
-import DragAndDropContext from './dragAndDropContext/dragAndDropContext';
-import ReduxContext       from './reduxContext/reduxContext';
+import React                 from 'react';
+import DragAndDropContext    from './dragAndDropContext/dragAndDropContext';
+import ReduxContext          from './reduxContext/reduxContext';
+import PerformerModalContext from "./performerModalContext/performerContext";
 
 interface AppContextProps {
     children: any
@@ -9,7 +10,9 @@ interface AppContextProps {
 const AppContext: React.FC<AppContextProps> = ({children}) => {
     return <ReduxContext>
         <DragAndDropContext>
-            {children}
+            <PerformerModalContext>
+                {children}
+            </PerformerModalContext>
         </DragAndDropContext>
     </ReduxContext>;
 }

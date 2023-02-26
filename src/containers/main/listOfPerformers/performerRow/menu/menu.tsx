@@ -1,13 +1,14 @@
-import React from 'react';
+import React, {useContext}                                                                from 'react';
 import {Menu, Divider, ListItemIcon, ListItemText, MenuItem, MenuList, Paper, Typography} from "@mui/material";
-import {Cloud, ContentCopy, ContentCut, ContentPaste} from "@mui/icons-material";
-import {useDispatch} from "react-redux";
-import {IPerformerItem} from "../../../../../interfaces/IPerformers";
-import {setConfirmationOpen} from "../../../../../slices/modal";
+import {Cloud, ContentCopy, ContentCut, ContentPaste}                                     from "@mui/icons-material";
+import {useDispatch}                                                                      from "react-redux";
+import {IPerformerItem}                                                                   from "../../../../../interfaces/IPerformers";
+import {setConfirmationOpen}                                                              from "../../../../../slices/modal";
 import {
     removePerformer,
     removePerformerTask
-} from "../../../../../slices/performers";
+}                                                                                         from "../../../../../slices/performers";
+import {PerformerModalContextChanger}                                                     from "../../../../../contexts/performerModalContext/performerContext";
 
 interface menuProps {
     contextMenu: { mouseX: number, mouseY: number } | null,
@@ -17,6 +18,15 @@ interface menuProps {
 
 const PerformerMenu: React.FC<menuProps> = ({contextMenu, setContextMenu, performer}) => {
     const dispatch = useDispatch();
+    const performerModalAction = useContext(PerformerModalContextChanger);
+
+    const handleEdit = () => {
+        if (performerModalAction) {
+            performerModalAction({
+                id: performer.uuid,
+            })
+        }
+    }
 
     const handleClose = () => {
         setContextMenu(null);
@@ -32,10 +42,6 @@ const PerformerMenu: React.FC<menuProps> = ({contextMenu, setContextMenu, perfor
         }))
     }
 
-    const handleEdit = () => {
-        
-    }
-
 
     return <Menu
         open={contextMenu !== null}
@@ -48,9 +54,9 @@ const PerformerMenu: React.FC<menuProps> = ({contextMenu, setContextMenu, perfor
         }
     >
 
-        <MenuItem onClick={handleClose} disabled={true}>{performer.lastName} {performer.firstName}</MenuItem>
+        <MenuItem disabled={true}>{performer.lastName} {performer.firstName}</MenuItem>
         <Divider/>
-        <MenuItem onClick={handleClose} disabled={true}>Редактировать</MenuItem>
+        <MenuItem onClick={handleEdit}>Редактировать</MenuItem>
         <Divider/>
         <MenuItem style={{color: 'red'}}>Удалить исполнителя</MenuItem>
     </Menu>;

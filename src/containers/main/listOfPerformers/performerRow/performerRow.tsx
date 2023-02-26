@@ -4,18 +4,20 @@ import {Draggable, Droppable}                 from "react-beautiful-dnd";
 import {inspect}                              from "util";
 import styles                                 from './performanceRow.module.scss';
 import CN                                     from 'classnames';
-import {hourDefinition, maxSprintHours} from "../../../../App";
-import TaskCard                         from "../../../../components/taskCard/taskCard";
-import {useSelector}                    from "react-redux";
-import {TStore}                         from "../../../../store/store";
-import Ruler                            from "./ruler/ruler";
-import Metrics                          from "./metrics/metrics";
-import QrCode2Icon                      from '@mui/icons-material/QrCode2';
-import IntegrationInstructionsIcon      from '@mui/icons-material/IntegrationInstructions';
-import BugReportIcon                    from '@mui/icons-material/BugReport';
-import AnalyticsIcon                    from '@mui/icons-material/Analytics';
-import KeyboardArrowDownIcon            from '@mui/icons-material/KeyboardArrowDown';
-import PerformerMenu                    from "./menu/menu";
+import {hourDefinition, maxSprintHours}       from "../../../../App";
+import TaskCard                               from "../../../../components/taskCard/taskCard";
+import {useSelector}                          from "react-redux";
+import {TStore}                               from "../../../../store/store";
+import Ruler                                  from "./ruler/ruler";
+import Metrics                                from "./metrics/metrics";
+import QrCode2Icon                            from '@mui/icons-material/QrCode2';
+import IntegrationInstructionsIcon            from '@mui/icons-material/IntegrationInstructions';
+import BugReportIcon                          from '@mui/icons-material/BugReport';
+import AnalyticsIcon                          from '@mui/icons-material/Analytics';
+import KeyboardArrowDownIcon                  from '@mui/icons-material/KeyboardArrowDown';
+import ManageAccountsIcon                     from '@mui/icons-material/ManageAccounts';
+import GamesIcon                              from '@mui/icons-material/Games';
+import PerformerMenu                          from "./menu/menu";
 
 interface PerformerRowProps {
     performer: IPerformerItem
@@ -61,6 +63,8 @@ const PerformerRow: React.FC<PerformerRowProps> = ({performer}) => {
                 <div className={styles.icon}>
                     {performer.roleId === PERFORMER_TYPES_ENUM.FRONTEND && <QrCode2Icon/>}
                     {performer.roleId === PERFORMER_TYPES_ENUM.BACKEND && <IntegrationInstructionsIcon/>}
+                    {performer.roleId === PERFORMER_TYPES_ENUM.TEAM_LEAD && <GamesIcon/>}
+                    {performer.roleId === PERFORMER_TYPES_ENUM.PM && <ManageAccountsIcon/>}
                     {performer.roleId === PERFORMER_TYPES_ENUM.TESTING && <BugReportIcon/>}
                     {performer.roleId === PERFORMER_TYPES_ENUM.ANALYTICS && <AnalyticsIcon/>}
                 </div>
@@ -88,7 +92,8 @@ const PerformerRow: React.FC<PerformerRowProps> = ({performer}) => {
                         {performer.tasks.map((item, index) => (
                             <Draggable key={item.uuid} draggableId={item.uuid} index={index}>
                                 {(provided, snapshot) => (
-                                    <TaskCard item={item} provided={provided} snapshot={snapshot} performerLink={performer.uuid}/>
+                                    <TaskCard item={item} provided={provided} snapshot={snapshot}
+                                              performerLink={performer.uuid}/>
                                 )}
                             </Draggable>
                         ))}
