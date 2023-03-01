@@ -107,7 +107,7 @@ const PerformerModalContext: React.FC<ReduxContextProps> = ({children}) => {
     return <PerformerModalContextChanger.Provider value={enableModal}>
         {children}
         <Dialog open={createTaskDialogOpen} onClose={handleTaskDialogClose}>
-            <DialogTitle>Добавить исполнителя</DialogTitle>
+            <DialogTitle>{currentId ? 'Изменить исполнителя' : 'Добавить исполнителя'}</DialogTitle>
             <DialogContent>
                 <DialogContentText>
 

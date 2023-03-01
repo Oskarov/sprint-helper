@@ -26,6 +26,12 @@ const tasksSlice = createSlice({
                 items: state.items.filter(item => item.uuid !== payload)
             }
         },
+        editTask: (state, {payload}: PayloadAction<ITask>) => {
+            return {
+                ...state,
+                items: state.items.map(item => item.uuid !== payload.uuid ? item : payload)
+            }
+        },
         changeTaskIndex: (state, {payload}: PayloadAction<{ uuid: string, index: number }>) => {
             const currentItem = state.items.find(i => i.uuid === payload.uuid);
             if (currentItem) {
@@ -60,5 +66,6 @@ export const {
     removeTask,
     changeTaskIndex,
     createTaskWithIndex,
-    clearTasks
+    clearTasks,
+    editTask
 } = tasksSlice.actions;

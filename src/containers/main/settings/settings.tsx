@@ -65,6 +65,8 @@ const Settings: React.FC<SettingsProps> = () => {
             isOpen: true,
             modalText: <div>
                 <ul>
+                    <li>Добавлена возможность редактировать таски</li>
+                    <li>----------------------------------------</li>
                     <li>Добавлена возможность редактировать исполнителя через контекстное меню</li>
                     <li>Задачи тим лида не считаются в общей статистике</li>
                     <li>----------------------------------------</li>
@@ -88,7 +90,7 @@ const Settings: React.FC<SettingsProps> = () => {
         <div className={CN(styles.addButton, {[styles.reverse]: open})} onClick={() => setOpen(open => !open)}>
             <SettingsIcon/>
         </div>
-        <div className={styles.version} onClick={versionHandle}>v 1.05</div>
+        <div className={styles.version} onClick={versionHandle}>v 1.06</div>
         <div className={CN(styles.list, {[styles.open]: open})}>
             <div onClick={handleTaskDialogOpen}><span>Настройки</span><DisplaySettingsIcon/></div>
             <div onClick={handleClearBacklog}><span>Очистить беклог продукта</span><CleaningServicesIcon/></div>

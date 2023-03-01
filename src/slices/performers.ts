@@ -47,6 +47,15 @@ const performersSlice = createSlice({
                 })
             }
         },
+        editTaskForPerformer: (state, {payload}: PayloadAction<IPerformerTaskPayload>) => {
+            return {
+                ...state,
+                items: state.items.map(performer => performer.uuid !== payload.performerUuid ? performer : {
+                    ...performer,
+                    tasks: performer.tasks.map(task => task.uuid !== payload.task.uuid ? task : payload.task)
+                })
+            }
+        },
         addTaskForPerformerWithIndex: (state, {payload}: PayloadAction<{ performerUuid: string, task: ITask, index: number }>) => {
             return {
                 ...state,
@@ -108,5 +117,6 @@ export const {
     changePerformerTaskIndex,
     removeAllPerformerTasks,
     removePerformer,
-    editPerformer
+    editPerformer,
+    editTaskForPerformer
 } = performersSlice.actions;
