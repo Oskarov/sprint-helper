@@ -28,9 +28,9 @@ const Backlog: React.FC<BacklogProps> = () => {
         app: state.app
     }));
 
-    return <div>
+    return <div className={styles.list}>
         <div className={styles.title}>Бэклог продукта</div>
-        <Droppable droppableId={`backlog`} direction="vertical">
+        <Droppable droppableId={`backlog`} direction="horizontal">
             {(provided, snapshot) => (
                 <div
                     ref={provided.innerRef}

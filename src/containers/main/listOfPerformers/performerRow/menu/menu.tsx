@@ -9,6 +9,7 @@ import {
     removePerformerTask
 }                                                                                         from "../../../../../slices/performers";
 import {PerformerModalContextChanger}                                                     from "../../../../../contexts/performerModalContext/performerContext";
+import {TASK_TYPES_ENUM}                                                                  from "../../../../../interfaces/ITask";
 
 interface menuProps {
     contextMenu: { mouseX: number, mouseY: number } | null,
@@ -28,9 +29,55 @@ const PerformerMenu: React.FC<menuProps> = ({contextMenu, setContextMenu, perfor
         }
     }
 
+    /**
+     * Возвращает текущие разрешения по работе с буфером обмена.
+     * Возможные варианты: "granted", "denied", "prompt"
+     * Если браузер стар и не поддерживает работу с буфером обмена,
+     * то всегда будет denied
+     */
+    const getClipboardPermissions = async (): Promise<PermissionState> => {
+        const permissionKey = {name: 'clipboard-write'} as unknown as PermissionDescriptor;
+        const permissions = await navigator?.permissions.query(permissionKey);
+        return permissions.state || "denied";
+    }
+
+    function unsecuredCopyToClipboard(text: string) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.focus({preventScroll: true});
+        textArea.select();
+        try {
+            document.execCommand('copy');
+        } catch (err) {
+            console.error('Unable to copy to clipboard', err);
+        }
+        document.body.removeChild(textArea);
+    }
+
     const handleClose = () => {
         setContextMenu(null);
     };
+
+    const handleCopy = () => {
+        let text = 'Задачи нового спринта:\r\n';
+        performer.tasks.filter(task => ![TASK_TYPES_ENUM.VACATION, TASK_TYPES_ENUM.REVIEW, TASK_TYPES_ENUM.HOLLYDAYS, TASK_TYPES_ENUM.MEETINGS].includes(task.type)).forEach(task => {
+            text = text + `${task.name} (https://jira.eapteka.ru/browse/${task.number})\r\n`
+        })
+        const cp = navigator.clipboard;
+        if (!cp) {
+            alert("Браузер не поддерживает работу с буфером обмена на http протоколе");
+            unsecuredCopyToClipboard(text);
+            console.log("Попытка 2");
+        } else {
+            cp.writeText(text)
+                .catch(async e => {
+                    const permissions = await getClipboardPermissions();
+                    if (permissions === "denied") throw new Error("В вашем браузере выставлен запрет на копирование в буфер обмена!");
+                    throw e
+                })
+        }
+    }
 
     const handleDelete = () => {
         dispatch(setConfirmationOpen({
@@ -55,6 +102,7 @@ const PerformerMenu: React.FC<menuProps> = ({contextMenu, setContextMenu, perfor
     >
 
         <MenuItem disabled={true}>{performer.lastName} {performer.firstName}</MenuItem>
+        <MenuItem onClick={handleCopy}>Копировать в буфер</MenuItem>
         <Divider/>
         <MenuItem onClick={handleEdit}>Редактировать</MenuItem>
         <Divider/>

@@ -32,6 +32,11 @@ const appSlice = createSlice({
                 valueOfDivision: payload
             };
         },
+        setAppFromJson: (state, {payload}: PayloadAction<IAppState>) => {
+            return{
+                ...payload
+            }
+        }
     }
 })
 
@@ -40,4 +45,5 @@ export const {
     setValueOfDivision,
     setSprintSize,
     setRowSize,
+    setAppFromJson
 } = appSlice.actions;

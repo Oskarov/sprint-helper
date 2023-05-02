@@ -6,6 +6,8 @@ import {setInformationOpen}       from "../../../slices/modal";
 import {TStore}                   from "../../../store/store";
 import {TASK_TYPES_ENUM}          from "../../../interfaces/ITask";
 import {PERFORMER_TYPES_ENUM}     from "../../../interfaces/IPerformers";
+import ToJson                     from "./toJson/toJson";
+import FromJson                   from "./fromJson/fromJson";
 
 interface HeaderProps {
 
@@ -136,6 +138,8 @@ const Header: React.FC<HeaderProps> = () => {
             <div onClick={showStat}>
                 <AutoGraphIcon/>
             </div>
+            <ToJson/>
+            <FromJson/>
         </div>
     </div>;
 }

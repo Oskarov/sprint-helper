@@ -12,8 +12,6 @@ interface SimpleConfirmationDialogProps {
 const ReduxInformationDialog: React.FC<SimpleConfirmationDialogProps> = () => {
     const {isOpen, modalText, modalTitle, closeButton} = useSelector((state: TStore) => state.modal.information);
     const dispatch = useDispatch();
-
-    console.log(modalText);
     return <Dialog
         open={isOpen}
         onClose={() => dispatch(setInformationClose())}

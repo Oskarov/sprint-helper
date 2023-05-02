@@ -21,6 +21,10 @@
   border-radius: 20px;
 
   > * {
+    margin-right: 8px;
+    &:last-child{
+      margin-right: 0;
+    }
     &:hover {
       color: #8295e1;
       cursor: pointer;

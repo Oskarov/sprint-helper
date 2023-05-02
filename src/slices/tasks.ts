@@ -57,6 +57,11 @@ const tasksSlice = createSlice({
                 items: []
             }
         },
+        setTasksFromJson: (state, {payload}: PayloadAction<ITasksState>) => {
+            return {
+                ...payload
+            }
+        },
     }
 })
 
@@ -67,5 +72,6 @@ export const {
     changeTaskIndex,
     createTaskWithIndex,
     clearTasks,
-    editTask
+    editTask,
+    setTasksFromJson
 } = tasksSlice.actions;

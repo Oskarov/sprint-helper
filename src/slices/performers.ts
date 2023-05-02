@@ -105,6 +105,11 @@ const performersSlice = createSlice({
                 })
             }
         },
+        setPerformersFromJson: (state, {payload}: PayloadAction<IPerformersState>) => {
+            return {
+                ...payload
+            }
+        },
     }
 })
 
@@ -118,5 +123,6 @@ export const {
     removeAllPerformerTasks,
     removePerformer,
     editPerformer,
-    editTaskForPerformer
+    editTaskForPerformer,
+    setPerformersFromJson,
 } = performersSlice.actions;
