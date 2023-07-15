@@ -4,6 +4,7 @@ export interface ITask {
     number: string,
     capacity: number,
     type: number,
+    projectId: number
 }
 
 export interface ITasksState {
@@ -76,4 +77,27 @@ export const taskTypes = [
         name: 'Праздники',
         type: TASK_TYPES_ENUM.HOLLYDAYS
     },
+];
+
+export const projectsList = [
+    {
+        id: 10,
+        name: 'TMS',
+        color: '#172f70'
+    },
+    {
+        id: 20,
+        name: 'STK',
+        color: '#177026'
+    },
+    {
+        id: 30,
+        name: 'STOR',
+        color: '#70172f'
+    },
+    {
+        id: 40,
+        name: 'PP',
+        color: '#705417'
+    }
 ]

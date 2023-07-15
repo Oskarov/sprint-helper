@@ -1,18 +1,18 @@
-import React                                       from 'react';
-import CN                                          from "classnames";
-import styles                                      from "./taskCard.module.scss";
-import {ITask, TASK_TYPES_ENUM, taskTypes}         from "../../interfaces/ITask";
-import {DraggableProvided, DraggableStateSnapshot} from "react-beautiful-dnd";
-import {hourDefinition}                            from "../../App";
-import VisibilityIcon                              from '@mui/icons-material/Visibility';
-import GroupsIcon                                  from '@mui/icons-material/Groups';
-import KayakingIcon                                from '@mui/icons-material/Kayaking';
-import CelebrationIcon                             from '@mui/icons-material/Celebration';
-import {useDispatch, useSelector}                  from "react-redux";
-import {TStore}                                    from "../../store/store";
-import {Menu, MenuItem, Tooltip}                   from "@mui/material";
-import TaskMenu                                    from "./menu/menu";
-import {clearTargetTask, setTargetTask}            from "../../slices/modal";
+import React                                             from 'react';
+import CN                                                from "classnames";
+import styles                                            from "./taskCard.module.scss";
+import {ITask, projectsList, TASK_TYPES_ENUM, taskTypes} from "../../interfaces/ITask";
+import {DraggableProvided, DraggableStateSnapshot}       from "react-beautiful-dnd";
+import {hourDefinition}                                  from "../../App";
+import VisibilityIcon                                    from '@mui/icons-material/Visibility';
+import GroupsIcon                                        from '@mui/icons-material/Groups';
+import KayakingIcon                                      from '@mui/icons-material/Kayaking';
+import CelebrationIcon                                   from '@mui/icons-material/Celebration';
+import {useDispatch, useSelector}                        from "react-redux";
+import {TStore}                                          from "../../store/store";
+import {Menu, MenuItem, Tooltip}                         from "@mui/material";
+import TaskMenu                                          from "./menu/menu";
+import {clearTargetTask, setTargetTask}                  from "../../slices/modal";
 
 interface TaskCardProps {
     item: ITask,
@@ -60,6 +60,8 @@ const TaskCard: React.FC<TaskCardProps> = ({item, provided, snapshot, performerL
         // eslint-disable-next-line no-console
         console.log(e)
     }
+
+    const project = projectsList.find(i => i.id === item.projectId);
 
 
     return <div
@@ -120,10 +122,13 @@ const TaskCard: React.FC<TaskCardProps> = ({item, provided, snapshot, performerL
             <div className={styles.number}><a href={`https://jira.eapteka.ru/browse/${item.number}`}
                                               target={"_blank"} rel={"noreferrer`"}>{item.number}</a></div>
             <div className={styles.name}>
-                <Tooltip title={`${item.number} ${item.name} (${item.capacity})`}>
+                <Tooltip title={`[${project?.name || ''}] ${item.number} ${item.name} (${item.capacity})`}>
                     <span>{item.name}</span>
                 </Tooltip>
             </div>
+            {project && <div className={styles.projectMarker} style={{backgroundColor: project.color}}>
+                {project.name}
+            </div>}
 
         </div>}
         <TaskMenu contextMenu={contextMenu} setContextMenu={setContextMenu} performerLink={performerLink} task={item}/>

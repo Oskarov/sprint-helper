@@ -6,7 +6,7 @@ import DialogContentText                                  from "@mui/material/Di
 import TextField                                          from "@mui/material/TextField";
 import {FormControl, MenuItem, Select, SelectChangeEvent} from "@mui/material";
 import styles                                             from "../../containers/main/control/control.module.scss";
-import {TASK_TYPES_ENUM, taskTypes}                       from "../../interfaces/ITask";
+import {projectsList, TASK_TYPES_ENUM, taskTypes}         from "../../interfaces/ITask";
 import DialogActions                                      from "@mui/material/DialogActions";
 import Button                                             from "@mui/material/Button";
 import Dialog                                             from "@mui/material/Dialog";
@@ -32,7 +32,8 @@ const TaskModalContext: React.FC<TaskModalContextProps> = ({children}) => {
         name: '',
         number: '',
         capacity: 1,
-        type: TASK_TYPES_ENUM.BACKEND_TASK
+        type: TASK_TYPES_ENUM.BACKEND_TASK,
+        projectId: 10,
     }
 
     const dispatch = useDispatch();
@@ -55,7 +56,8 @@ const TaskModalContext: React.FC<TaskModalContextProps> = ({children}) => {
                     name: backlogTask.name,
                     type: backlogTask.type,
                     number: backlogTask.number,
-                    capacity: backlogTask.capacity
+                    capacity: backlogTask.capacity,
+                    projectId: backlogTask.projectId
                 })
             }
         }
@@ -71,7 +73,8 @@ const TaskModalContext: React.FC<TaskModalContextProps> = ({children}) => {
                     name: performerTask.name,
                     type: performerTask.type,
                     number: performerTask.number,
-                    capacity: performerTask.capacity
+                    capacity: performerTask.capacity,
+                    projectId: performerTask.projectId
                 })
             }
         }
@@ -105,6 +108,14 @@ const TaskModalContext: React.FC<TaskModalContextProps> = ({children}) => {
         setTaskData(data => ({
             ...data,
             type: event.target.value as number
+        }))
+    }
+
+
+    const handleProjectChange = (event: SelectChangeEvent<number>) => {
+        setTaskData(data => ({
+            ...data,
+            projectId: event.target.value as number
         }))
     }
 
@@ -210,6 +221,18 @@ const TaskModalContext: React.FC<TaskModalContextProps> = ({children}) => {
                     >
                         {taskTypes.map(taskType => <MenuItem value={taskType.type}
                                                              key={taskType.id}>{taskType.name}</MenuItem>)}
+                    </Select>
+                </FormControl>
+                <FormControl variant="standard" className={styles.projectType}>
+                    <Select
+                        id="type"
+                        value={taskData.projectId}
+                        label="Age"
+                        fullWidth={true}
+                        onChange={handleProjectChange}
+                    >
+                        {projectsList.map(pr => <MenuItem value={pr.id}
+                                                          key={pr.id}>{pr.name}</MenuItem>)}
                     </Select>
                 </FormControl>
 
