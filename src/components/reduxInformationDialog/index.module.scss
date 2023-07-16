@@ -4,6 +4,10 @@
   width: 489px;
   padding: 56px 32px 40px !important;
 
+  &.big{
+    width: 600px;
+  }
+
   .roundButton {
     position: absolute;
     right: 8px;
@@ -25,6 +29,12 @@
   font-size: 24px;
   line-height: 32px;
   text-align: center;
+}
+
+.onlyDone{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .buttons {

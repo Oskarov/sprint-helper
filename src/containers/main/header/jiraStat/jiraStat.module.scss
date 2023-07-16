@@ -1,0 +1,85 @@
+.title {
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.cont {
+  padding-top: 16px;
+}
+
+.problem{
+  font-size: 12px;
+  margin-bottom: 16px;
+
+}
+
+.table {
+  display: flex;
+  align-items: flex-start;
+  font-size: 12px;
+  width: 100%;
+  border: 1px solid black;
+
+  .title{
+    margin-bottom: 0;
+    font-size: 12px;
+    padding: 4px 0;
+    border-bottom: 1px solid black;
+  }
+
+  .inner{
+    border-right: 1px solid black;
+    flex: 1 1 auto;
+    text-align: center;
+
+    &:last-child {
+      border-right: transparent;
+    }
+  }
+
+  .th {
+    display: flex;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid black;
+
+    > div {
+      width: 7px;
+      height: 70px;
+      flex: 1 1 auto;
+      border-right: 1px solid black;
+      font-weight: 800;
+      position: relative;
+
+      &:last-child {
+        border-right: transparent;
+      }
+
+      > span {
+        position: relative;
+        bottom: -35px;
+
+        text-align: center;
+        display: block;
+        transform: rotate(-90deg);
+      }
+    }
+  }
+
+  .values{
+    display: flex;
+
+    >div{
+      width: 10px;
+      font-size: 10px;
+      padding: 4px 0;
+      flex: 1 1 auto;
+      text-align: center;
+      border-right: 1px solid black;
+      &:last-child {
+        border-right: transparent;
+      }
+    }
+  }
+}

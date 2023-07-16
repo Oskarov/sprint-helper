@@ -8,6 +8,7 @@ import {TASK_TYPES_ENUM}          from "../../../interfaces/ITask";
 import {PERFORMER_TYPES_ENUM}     from "../../../interfaces/IPerformers";
 import ToJson                     from "./toJson/toJson";
 import FromJson                   from "./fromJson/fromJson";
+import JiraStat                   from "./jiraStat/jiraStat";
 
 interface HeaderProps {
 
@@ -140,6 +141,7 @@ const Header: React.FC<HeaderProps> = () => {
             </div>
             <ToJson/>
             <FromJson/>
+            <JiraStat/>
         </div>
     </div>;
 }
