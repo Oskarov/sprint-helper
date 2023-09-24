@@ -48,9 +48,46 @@ const Header: React.FC<HeaderProps> = () => {
     let frontendSupport = 0;
     let frontendSupportCount = 0;
 
+    const tasksNumbers:string[] = [];
     performers.forEach(performer => {
+
         if (performer.roleId !== PERFORMER_TYPES_ENUM.TEAM_LEAD) {
             performer.tasks.forEach(task => {
+                if (!tasksNumbers.includes(task.number)){
+                    tasksNumbers.push(task.number);
+                    if (task.type === TASK_TYPES_ENUM.BACKEND_TASK) {
+                        performersProductCount++;
+                        backendProductCount++;
+                    }
+
+                    if (task.type === TASK_TYPES_ENUM.BACKEND_TECH_DEBT) {
+                        performersTechDebtCount++;
+                        backendTechDebtCount++;
+                    }
+
+                    if (task.type === TASK_TYPES_ENUM.BACKEND_BUG) {
+                        performersSupportCount++;
+                        backendSupportCount++;
+                    }
+
+
+                    if (task.type === TASK_TYPES_ENUM.FRONTEND_TASK) {
+                        performersProductCount++;
+                        frontendProductCount++;
+                    }
+
+                    if (task.type === TASK_TYPES_ENUM.FRONTEND_TECH_DEBT) {
+                        performersTechDebtCount++;
+                        frontendTechDebtCount++;
+                    }
+
+                    if (task.type === TASK_TYPES_ENUM.FRONTEND_BUG) {
+                        performersSupportCount++;
+                        frontendSupportCount++;
+                    }
+
+                }
+
                 performersSprintSize = performersSprintSize + task.capacity;
                 performersSprintCount++;
 
@@ -58,24 +95,18 @@ const Header: React.FC<HeaderProps> = () => {
                     performersProduct = performersProduct + task.capacity;
                     backendProduct = backendProduct + task.capacity;
                     backendSprintSize = backendSprintSize + task.capacity;
-                    performersProductCount++;
-                    backendProductCount++;
                 }
 
                 if (task.type === TASK_TYPES_ENUM.BACKEND_TECH_DEBT) {
                     performersTechDebt = performersTechDebt + task.capacity;
                     backendSprintSize = backendSprintSize + task.capacity;
                     backendTechDebt = backendTechDebt + task.capacity;
-                    performersTechDebtCount++;
-                    backendTechDebtCount++;
                 }
 
                 if (task.type === TASK_TYPES_ENUM.BACKEND_BUG) {
                     performersSupport = performersSupport + task.capacity;
                     backendSprintSize = backendSprintSize + task.capacity;
                     backendSupport = backendSupport + task.capacity;
-                    performersSupportCount++;
-                    backendSupportCount++;
                 }
 
 
@@ -83,24 +114,18 @@ const Header: React.FC<HeaderProps> = () => {
                     performersProduct = performersProduct + task.capacity;
                     frontendProduct = frontendProduct + task.capacity;
                     frontendSprintSize = frontendSprintSize + task.capacity;
-                    performersProductCount++;
-                    frontendProductCount++;
                 }
 
                 if (task.type === TASK_TYPES_ENUM.FRONTEND_TECH_DEBT) {
                     performersTechDebt = performersTechDebt + task.capacity;
                     frontendSprintSize = frontendSprintSize + task.capacity;
                     frontendTechDebt = frontendTechDebt + task.capacity;
-                    performersTechDebtCount++;
-                    frontendTechDebtCount++;
                 }
 
                 if (task.type === TASK_TYPES_ENUM.FRONTEND_BUG) {
                     performersSupport = performersSupport + task.capacity;
                     frontendSprintSize = frontendSprintSize + task.capacity;
                     frontendSupport = frontendSupport + task.capacity;
-                    performersSupportCount++;
-                    frontendSupportCount++;
                 }
 
 
@@ -128,6 +153,13 @@ const Header: React.FC<HeaderProps> = () => {
                 <div><span>frontend Product:</span><span>{frontendProductCount}/{frontendProduct}</span></div>
                 <div><span>frontend TechDebt:</span><span>{frontendTechDebtCount}/{frontendTechDebt}</span></div>
                 <div><span>frontend Support:</span><span>{frontendSupportCount}/{frontendSupport}</span></div>
+                <hr/>
+                <div>
+                    <span>Общая вместимость спринта:</span><span>{frontendProductCount + frontendTechDebtCount + frontendSupportCount}/{frontendSprintSize}</span>
+                </div>
+                <div><span>Product:</span><span>{frontendProductCount + backendProductCount}/{frontendProduct + backendProduct}</span></div>
+                <div><span>TechDebt:</span><span>{frontendTechDebtCount + backendTechDebtCount}/{frontendTechDebt + backendTechDebt}</span></div>
+                <div><span>Support:</span><span>{frontendSupportCount + backendSupportCount}/{frontendSupport + backendSupport}</span></div>
             </div>
         }))
     }

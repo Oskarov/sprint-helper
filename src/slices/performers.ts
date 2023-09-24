@@ -1,6 +1,6 @@
-import {createSlice, PayloadAction}                              from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {IPerformerItem, IPerformersState, IPerformerTaskPayload} from "../interfaces/IPerformers";
-import {ITask}                                                   from "../interfaces/ITask";
+import {ITask} from "../interfaces/ITask";
 
 const initialState: IPerformersState = {
     items: [],
@@ -85,7 +85,10 @@ const performersSlice = createSlice({
         removeAllPerformerTasks: (state) => {
             return {
                 ...state,
-                items: state.items.map(performer => ({...performer, tasks: []}))
+                items: state.items.map(performer => ({
+                    ...performer,
+                    tasks: performer.tasks.filter(task => [10, 20, 30, 40].includes(task.type))
+                }))
             }
         },
         changePerformerTaskIndex: (state, {payload}: PayloadAction<{ performerUuid: string, taskUuid: string, index: number }>) => {
