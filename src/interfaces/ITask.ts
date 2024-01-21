@@ -104,5 +104,10 @@ export const projectsList = [
         id: 50,
         name: 'GA',
         color: '#ff8132'
+    },
+    {
+        id: 60,
+        name: 'COM',
+        color: '#fcd94b'
     }
 ]

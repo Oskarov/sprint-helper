@@ -110,7 +110,7 @@ const PerformerMenu: React.FC<menuProps> = ({contextMenu, setContextMenu, perfor
         <Divider/>
         <MenuItem onClick={handleEdit}>Редактировать</MenuItem>
         <Divider/>
-        <MenuItem style={{color: 'red'}}>Удалить исполнителя</MenuItem>
+        <MenuItem style={{color: 'red'}} onClick={handleDelete}>Удалить исполнителя</MenuItem>
     </Menu>;
 }
 
